@@ -1,7 +1,9 @@
 class DashboardPage {
     constructor(page1) {
       this.page = page1;
-      this.dashboardElement = page1.locator('[class="hidden md:block text-3xl font-medium tracking-tight"]'); 
+      this.userEmailText = page1.locator('[id="user-info-email"]'); 
+      this.homeBtn = page1.getByLabel('Home');
+      this.actionIcon = page1.locator('[id="radix-:rn:"]');
     }
   }
   
