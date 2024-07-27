@@ -24,7 +24,6 @@ test.beforeEach(async () => {
   context = await browser.newContext();
   // Open the first tab (page)
   page1 = await context.newPage();
-  // await page1.goto(userData.URL);
   // Second tab instance
   page2 = await context.newPage();
   // Create login page objects instance
@@ -43,70 +42,19 @@ test.afterEach(async () => {
 });
 
 test("Verify that user is able to login", async () => {
-  // Focus on first tab
-  await page1.bringToFront();
-  // Open application URL
-  await page1.goto(userData.URL);
-  // Enter email address 
-  await loginPage.emailField.fill(userData.email)
-  // Click on continue with email button
-  await loginPage.emailBtn.click()
-  // Click on continue button
-  await loginPage.continueBtn.click()
-  // Focus on second tab
-  await page2.bringToFront();
-  // Open mailinator URL
-  await page2.goto(userData.mailServer);
-  // Wait for recent email to be loaded
-  await page2.waitForTimeout(5000);
-  // Reload page
-  await page2.reload()
-  // Get email subject text
-  const emailSubjectText = await mailinatorPage.getEmailSubjectText();
-  // Retrieve OTP text
-  const otp = emailSubjectText.slice(-23);
-  // Close the mailinator instance
-  await page2.close()
-  // Enter OTP
-  await loginPage.otpField.fill(otp);
-  // Click on continue button
-  await loginPage.continueBtn.click();
-  // Click on home button
-  await page1.waitForTimeout(5000);
+  // Perform user login
+  await loginPage.login(page1, page2, userData.URL, userData.email, userData.mailServer)
+  // Click on home page
   await dashboardPage.homeBtn.click();
-  // Assert user email on dashboard page
+  await page1.goto(userData.homePageUrl)
+  await page1.waitForTimeout(5000);
+  // Assert that user is landing to dashboard page
   await expect(dashboardPage.userEmailText).toHaveText(userData.email);
 });
 
 test("Verifiy that user is able to open file from file list by using Open in New Tab option", async () => {
-  // Focus on first tab
-  await page1.bringToFront();
-  // Open application URL
-  await page1.goto(userData.URL);
-  // Enter email address 
-  await loginPage.emailField.fill(userData.email)
-  // Click on continue with email button
-  await loginPage.emailBtn.click()
-  // Click on continue button
-  await loginPage.continueBtn.click()
-  // Focus on second tab
-  await page2.bringToFront();
-  // Open mailinator URL
-  await page2.goto(userData.mailServer);
-  // Wait for recent email to be loaded
-  await page2.waitForTimeout(5000);
-  // Reload page
-  await page2.reload()
-  // Get email subject text
-  const emailSubjectText = await mailinatorPage.getEmailSubjectText();
-  // Retrieve OTP text
-  const otp = emailSubjectText.slice(-23);
-  // Close the mailinator instance
-  await page2.close()
-  // Enter OTP
-  await loginPage.otpField.fill(otp);
-  // Click on continue button
-  await loginPage.continueBtn.click();
+  // Perform user login
+  await loginPage.login(page1, page2, userData.URL, userData.email, userData.mailServer)
   // Goto home page
   await dashboardPage.homeBtn.click();
   await page1.goto(userData.homePageUrl)
@@ -135,34 +83,8 @@ test("Verifiy that user is able to open file from file list by using Open in New
 });
 
 test("Verifiy that user is able to open file from file list by using preview option", async () => {
-  // Focus on first tab
-  await page1.bringToFront();
-  // Open application URL
-  await page1.goto(userData.URL);
-  // Enter email address 
-  await loginPage.emailField.fill(userData.email)
-  // Click on continue with email button
-  await loginPage.emailBtn.click()
-  // Click on continue button
-  await loginPage.continueBtn.click()
-  // Focus on second tab
-  await page2.bringToFront();
-  // Open mailinator URL
-  await page2.goto(userData.mailServer);
-  // Wait for recent email to be loaded
-  await page2.waitForTimeout(5000);
-  // Reload page
-  await page2.reload()
-  // Get email subject text
-  const emailSubjectText = await mailinatorPage.getEmailSubjectText();
-  // Retrieve OTP text
-  const otp = emailSubjectText.slice(-23);
-  // Close the mailinator instance
-  await page2.close()
-  // Enter OTP
-  await loginPage.otpField.fill(otp);
-  // Click on continue button
-  await loginPage.continueBtn.click();
+  // Perform user login
+  await loginPage.login(page1, page2, userData.URL, userData.email, userData.mailServer);
   // Goto home page
   await dashboardPage.homeBtn.click();
   await page1.goto(userData.homePageUrl)
@@ -191,34 +113,8 @@ test("Verifiy that user is able to open file from file list by using preview opt
 });
 
 test("Verify that user is able to perform file search", async () => {
-  // Focus on first tab
-  await page1.bringToFront();
-  // Open application URL
-  await page1.goto(userData.URL);
-  // Enter email address 
-  await loginPage.emailField.fill(userData.email)
-  // Click on continue with email button
-  await loginPage.emailBtn.click()
-  // Click on continue button
-  await loginPage.continueBtn.click()
-  // Focus on second tab
-  await page2.bringToFront();
-  // Open mailinator URL
-  await page2.goto(userData.mailServer);
-  // Wait for recent email to be loaded
-  await page2.waitForTimeout(5000);
-  // Reload page
-  await page2.reload()
-  // Get email subject text
-  const emailSubjectText = await mailinatorPage.getEmailSubjectText();
-  // Retrieve OTP text
-  const otp = emailSubjectText.slice(-23);
-  // Close the mailinator instance
-  await page2.close()
-  // Enter OTP
-  await loginPage.otpField.fill(otp);
-  // Click on continue button
-  await loginPage.continueBtn.click();
+  // Perform user login
+  await loginPage.login(page1, page2, userData.URL, userData.email, userData.mailServer)
   // Goto home page
   await dashboardPage.homeBtn.click();
   await page1.goto(userData.homePageUrl)
