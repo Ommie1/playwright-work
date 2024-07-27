@@ -1,0 +1,26 @@
+{"level":"info","message":"Test case: User Login - Started","timestamp":"2024-07-27T14:25:05.416Z"}
+{"level":"info","message":"User has sucessfully login to application","timestamp":"2024-07-27T14:25:31.202Z"}
+{"level":"info","message":"User has sucessfully landed to dashboard page","timestamp":"2024-07-27T14:25:38.833Z"}
+{"level":"info","message":"User email is verified on dashboard","timestamp":"2024-07-27T14:25:38.863Z"}
+{"level":"info","message":"Test case: User Login - Completed","timestamp":"2024-07-27T14:25:38.863Z"}
+{"level":"info","message":"Test case: Open with new tab option - Started","timestamp":"2024-07-27T14:25:40.753Z"}
+{"level":"info","message":"User has sucessfully login to application","timestamp":"2024-07-27T14:26:19.336Z"}
+{"level":"info","message":"User has sucessfully landed to dashboard page","timestamp":"2024-07-27T14:26:25.302Z"}
+{"level":"info","message":"User has clicked on action button","timestamp":"2024-07-27T14:26:25.419Z"}
+{"level":"info","message":"User has clicked on open in new tab option","timestamp":"2024-07-27T14:26:25.805Z"}
+{"level":"info","message":"New tab URL has been verified","timestamp":"2024-07-27T14:26:26.110Z"}
+{"level":"info","message":"File has been opened in new tab","timestamp":"2024-07-27T14:27:09.543Z"}
+{"level":"info","message":"Test case: Open with new tab option - Completed","timestamp":"2024-07-27T14:27:09.543Z"}
+{"level":"info","message":"Test case: File Open with Preview - Started","timestamp":"2024-07-27T14:27:11.733Z"}
+{"level":"info","message":"User has sucessfully login to application","timestamp":"2024-07-27T14:27:34.194Z"}
+{"level":"info","message":"User has sucessfully landed to dashboard page","timestamp":"2024-07-27T14:27:47.025Z"}
+{"level":"info","message":"User has clicked on action button","timestamp":"2024-07-27T14:27:47.148Z"}
+{"level":"info","message":"User has clicked on preview option","timestamp":"2024-07-27T14:27:47.533Z"}
+{"level":"info","message":"Preview URL has been verified","timestamp":"2024-07-27T14:27:47.829Z"}
+{"level":"info","message":"File has been opened in new tab","timestamp":"2024-07-27T14:28:17.493Z"}
+{"level":"info","message":"Test case: Open with preview option - Completed","timestamp":"2024-07-27T14:28:17.493Z"}
+{"level":"info","message":"Test case: File search - Started","timestamp":"2024-07-27T14:28:19.629Z"}
+{"level":"info","message":"User has sucessfully login to application","timestamp":"2024-07-27T14:28:42.170Z"}
+{"level":"info","message":"User has sucessfully landed to dashboard page","timestamp":"2024-07-27T14:28:49.367Z"}
+{"level":"info","message":"File searching operation is fine","timestamp":"2024-07-27T14:28:49.481Z"}
+{"level":"info","message":"Test case: File search - Completed","timestamp":"2024-07-27T14:28:49.481Z"}

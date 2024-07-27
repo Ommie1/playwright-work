@@ -1,0 +1,6 @@
+{"level":"info","message":"Test case: Open with new tab option - Started","timestamp":"2024-07-27T14:41:11.897Z"}
+{"level":"info","message":"User has sucessfully login to application","timestamp":"2024-07-27T14:41:36.494Z"}
+{"level":"info","message":"User has sucessfully landed to dashboard page","timestamp":"2024-07-27T14:41:43.671Z"}
+{"level":"info","message":"User has clicked on action button","timestamp":"2024-07-27T14:41:43.791Z"}
+{"level":"info","message":"User has clicked on open in new tab option","timestamp":"2024-07-27T14:41:44.178Z"}
+{"level":"info","message":"New tab URL has been verified","timestamp":"2024-07-27T14:41:44.487Z"}
