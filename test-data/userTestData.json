@@ -4,5 +4,6 @@
     "homePageUrl":"https://fenixshare.anchormydata.com/fenixpyre/home",
     "documentTabUrl":"https://fenixshare.anchormydata.com/fenixpyre/v/QA%20-%20Automation%20Task.docx",
     "dashboardText":"Recent Files",
-    "email":"umair.hassan@mailinator.com"
+    "email":"umair.hassan@mailinator.com",
+    "searchText": "QA"
 }

@@ -42,7 +42,7 @@ test.afterEach(async () => {
   await browser.close();
 });
 
-test("User login", async () => {
+test("Verify that user is able to login", async () => {
   // Focus on first tab
   await page1.bringToFront();
   // Open application URL
@@ -58,7 +58,7 @@ test("User login", async () => {
   // Open mailinator URL
   await page2.goto(userData.mailServer);
   // Wait for recent email to be loaded
-  await page2.waitForTimeout(10000);
+  await page2.waitForTimeout(5000);
   // Reload page
   await page2.reload()
   // Get email subject text
@@ -72,13 +72,13 @@ test("User login", async () => {
   // Click on continue button
   await loginPage.continueBtn.click();
   // Click on home button
-  await page1.waitForTimeout(10000);
+  await page1.waitForTimeout(5000);
   await dashboardPage.homeBtn.click();
   // Assert user email on dashboard page
   await expect(dashboardPage.userEmailText).toHaveText(userData.email);
 });
 
-test("Navigate to the file list use Open in New Tab option", async () => {
+test("Verifiy that user is able to open file from file list by using Open in New Tab option", async () => {
   // Focus on first tab
   await page1.bringToFront();
   // Open application URL
@@ -94,7 +94,7 @@ test("Navigate to the file list use Open in New Tab option", async () => {
   // Open mailinator URL
   await page2.goto(userData.mailServer);
   // Wait for recent email to be loaded
-  await page2.waitForTimeout(10000);
+  await page2.waitForTimeout(5000);
   // Reload page
   await page2.reload()
   // Get email subject text
@@ -110,7 +110,7 @@ test("Navigate to the file list use Open in New Tab option", async () => {
   // Goto home page
   await dashboardPage.homeBtn.click();
   await page1.goto(userData.homePageUrl)
-  await page1.waitForTimeout(10000);
+  await page1.waitForTimeout(5000);
   // Click on action option
   const documentOptions = dashboardPage.actionIcon;
   await documentOptions.waitFor({ state: 'visible' });
@@ -134,7 +134,7 @@ test("Navigate to the file list use Open in New Tab option", async () => {
   await newTab.waitForTimeout(10000);
 });
 
-test("Navigate to the file list use preview option", async () => {
+test("Verifiy that user is able to open file from file list by using preview option", async () => {
   // Focus on first tab
   await page1.bringToFront();
   // Open application URL
@@ -150,7 +150,7 @@ test("Navigate to the file list use preview option", async () => {
   // Open mailinator URL
   await page2.goto(userData.mailServer);
   // Wait for recent email to be loaded
-  await page2.waitForTimeout(10000);
+  await page2.waitForTimeout(5000);
   // Reload page
   await page2.reload()
   // Get email subject text
@@ -187,5 +187,51 @@ test("Navigate to the file list use preview option", async () => {
   // Wait for document to be loaded
   const spinningElement = newTab.locator('.animate-spin');
   await spinningElement.waitFor({ state: 'hidden' });
-  await newTab.waitForTimeout(10000);
+  await newTab.waitForTimeout(5000);
+});
+
+test("Verify that user is able to perform file search", async () => {
+  // Focus on first tab
+  await page1.bringToFront();
+  // Open application URL
+  await page1.goto(userData.URL);
+  // Enter email address 
+  await loginPage.emailField.fill(userData.email)
+  // Click on continue with email button
+  await loginPage.emailBtn.click()
+  // Click on continue button
+  await loginPage.continueBtn.click()
+  // Focus on second tab
+  await page2.bringToFront();
+  // Open mailinator URL
+  await page2.goto(userData.mailServer);
+  // Wait for recent email to be loaded
+  await page2.waitForTimeout(5000);
+  // Reload page
+  await page2.reload()
+  // Get email subject text
+  const emailSubjectText = await mailinatorPage.getEmailSubjectText();
+  // Retrieve OTP text
+  const otp = emailSubjectText.slice(-23);
+  // Close the mailinator instance
+  await page2.close()
+  // Enter OTP
+  await loginPage.otpField.fill(otp);
+  // Click on continue button
+  await loginPage.continueBtn.click();
+  // Goto home page
+  await dashboardPage.homeBtn.click();
+  await page1.goto(userData.homePageUrl)
+  await page1.waitForTimeout(5000);
+  // Search file
+  await dashboardPage.searchBox.fill(userData.searchText)
+  // QA document file should be visible after search
+  const qaDocFile = dashboardPage.qaFileDocument;
+  // Assert that the qaDocFile is visible
+  await expect(qaDocFile).toBeVisible();
+  // Doc file should not be visible
+  const docFile = dashboardPage.docFile
+  // Assert that the qaDocFile is visible
+  await expect(docFile).toBeHidden();
+
 });
