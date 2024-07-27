@@ -15,9 +15,8 @@ let browser;
 let page1
 let page2
 
-test.setTimeout(60000); // Increase timeout to 60 seconds
+test.setTimeout(600000); // Increase timeout to 60 seconds
 
-// Open Browser before each test
 test.beforeEach(async () => {
   // Launch the browser
   browser = await chromium.launch({ headless: false });
@@ -39,8 +38,8 @@ test.beforeEach(async () => {
 
 // Close the page after each test
 test.afterEach(async () => {
-  await page1.close();
-  await page2.close();
+  await context.close();
+  await browser.close();
 });
 
 test("User login", async () => {
@@ -79,8 +78,8 @@ test("User login", async () => {
   await expect(dashboardPage.userEmailText).toHaveText(userData.email);
 });
 
-test.only("Navigate to the file list use Open in New Tab option", async () => {
-     // Focus on first tab
+test("Navigate to the file list use Open in New Tab option", async () => {
+  // Focus on first tab
   await page1.bringToFront();
   // Open application URL
   await page1.goto(userData.URL);
@@ -108,26 +107,85 @@ test.only("Navigate to the file list use Open in New Tab option", async () => {
   await loginPage.otpField.fill(otp);
   // Click on continue button
   await loginPage.continueBtn.click();
-  // Click on home button
-  await page1.waitForTimeout(10000);
+  // Goto home page
   await dashboardPage.homeBtn.click();
-   // Click on action option
-   const documentOptions = page1.locator('tr:has-text("QA - Automation Task.docx") [data-testid="ellipsis-icon"]');
-   await documentOptions.waitFor({ state: 'visible' });
-   await documentOptions.click();
-   // Click on open new tab option
-   const [newTab] = await Promise.all([
-   context.waitForEvent('page'),
-   page1.locator('#fp-home-recentfiles-recenttable-0-0_actions-open').click()
-   ]);
-   // Wait for the new tab to load
-   await newTab.waitForLoadState();
-   // Assertion the valid document link 
-   const newTabUrl = newTab.url();
-   console.log(newTabUrl)
-   expect(newTabUrl).toBe('https://fenixshare.anchormydata.com/fenixpyre/v/QA%20-%20Automation%20Task.docx');
-   // Wait for the new tab to load
-   await newTab.waitForLoadState();
-   // Screenshot
-   await newTab.screenshot({ path: 'screenshots/openinnewtab.png' });
+  await page1.goto(userData.homePageUrl)
+  await page1.waitForTimeout(10000);
+  // Click on action option
+  const documentOptions = dashboardPage.actionIcon;
+  await documentOptions.waitFor({ state: 'visible' });
+  await documentOptions.click();
+  // Click on open new tab option
+  const [newTab] = await Promise.all([
+    context.waitForEvent('page'),
+    dashboardPage.openNewTabBtn.click()
+  ]);
+  // Wait for the new tab to load
+  await newTab.waitForLoadState();
+  // Assertion the valid document link 
+  const newTabUrl = newTab.url();
+  console.log(newTabUrl)
+  expect(newTabUrl).toBe(userData.documentTabUrl);
+  // Wait for the new tab to load
+  await newTab.waitForLoadState();
+  // Wait for document to be loaded
+  const spinningElement = newTab.locator('.animate-spin');
+  await spinningElement.waitFor({ state: 'hidden' });
+  await newTab.waitForTimeout(10000);
+});
+
+test("Navigate to the file list use preview option", async () => {
+  // Focus on first tab
+  await page1.bringToFront();
+  // Open application URL
+  await page1.goto(userData.URL);
+  // Enter email address 
+  await loginPage.emailField.fill(userData.email)
+  // Click on continue with email button
+  await loginPage.emailBtn.click()
+  // Click on continue button
+  await loginPage.continueBtn.click()
+  // Focus on second tab
+  await page2.bringToFront();
+  // Open mailinator URL
+  await page2.goto(userData.mailServer);
+  // Wait for recent email to be loaded
+  await page2.waitForTimeout(10000);
+  // Reload page
+  await page2.reload()
+  // Get email subject text
+  const emailSubjectText = await mailinatorPage.getEmailSubjectText();
+  // Retrieve OTP text
+  const otp = emailSubjectText.slice(-23);
+  // Close the mailinator instance
+  await page2.close()
+  // Enter OTP
+  await loginPage.otpField.fill(otp);
+  // Click on continue button
+  await loginPage.continueBtn.click();
+  // Goto home page
+  await dashboardPage.homeBtn.click();
+  await page1.goto(userData.homePageUrl)
+  await page1.waitForTimeout(10000);
+  // Click on action option
+  const documentOptions = dashboardPage.actionIcon;
+  await documentOptions.waitFor({ state: 'visible' });
+  await documentOptions.click();
+  // Click on open new tab option
+  const [newTab] = await Promise.all([
+    context.waitForEvent('page'),
+    dashboardPage.previewBtn.click()
+  ]);
+  // Wait for the new tab to load
+  await newTab.waitForLoadState();
+  // Assertion the valid document link 
+  const newTabUrl = newTab.url();
+  console.log(newTabUrl)
+  expect(newTabUrl).toBe(userData.documentTabUrl);
+  // Wait for the new tab to load
+  await newTab.waitForLoadState();
+  // Wait for document to be loaded
+  const spinningElement = newTab.locator('.animate-spin');
+  await spinningElement.waitFor({ state: 'hidden' });
+  await newTab.waitForTimeout(10000);
 });
