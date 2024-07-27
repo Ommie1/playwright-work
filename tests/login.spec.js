@@ -2,6 +2,7 @@ const { test, expect } = require("@playwright/test");
 const { LoginPage } = require("../page-objects/LoginPage");
 const { DashboardPage } = require("../page-objects/DashboardPage");
 const { chromium } = require('playwright');
+const logger = require('../logger');
 const { MailinatorPage } = require("../page-objects/MailinatorPage");
 const userData = JSON.parse(
   JSON.stringify(require("../test-data/userTestData.json"))
@@ -42,83 +43,107 @@ test.afterEach(async () => {
 });
 
 test("Verify that user is able to login", async () => {
+  logger.info('Test case: User Login - Started');
   // Perform user login
   await loginPage.login(page1, page2, userData.URL, userData.email, userData.mailServer)
+  logger.info('User has sucessfully login to application');
   // Click on home page
   await dashboardPage.homeBtn.click();
   await page1.goto(userData.homePageUrl)
   await page1.waitForTimeout(5000);
+  logger.info('User has sucessfully landed to dashboard page');
   // Assert that user is landing to dashboard page
   await expect(dashboardPage.userEmailText).toHaveText(userData.email);
+  logger.info('User email is verified on dashboard');
+  logger.info('Test case: User Login - Completed');
 });
 
 test("Verifiy that user is able to open file from file list by using Open in New Tab option", async () => {
   // Perform user login
+  logger.info('Test case: Open with new tab option - Started');
   await loginPage.login(page1, page2, userData.URL, userData.email, userData.mailServer)
+  logger.info('User has sucessfully login to application');
   // Goto home page
   await dashboardPage.homeBtn.click();
   await page1.goto(userData.homePageUrl)
   await page1.waitForTimeout(5000);
+  logger.info('User has sucessfully landed to dashboard page');
   // Click on action option
   const documentOptions = dashboardPage.actionIcon;
   await documentOptions.waitFor({ state: 'visible' });
   await documentOptions.click();
+  logger.info('User has clicked on action button');
   // Click on open new tab option
   const [newTab] = await Promise.all([
     context.waitForEvent('page'),
     dashboardPage.openNewTabBtn.click()
   ]);
+  logger.info('User has clicked on open in new tab option');
   // Wait for the new tab to load
   await newTab.waitForLoadState();
   // Assertion the valid document link 
   const newTabUrl = newTab.url();
   console.log(newTabUrl)
   expect(newTabUrl).toBe(userData.documentTabUrl);
+  logger.info('New tab URL has been verified');
   // Wait for the new tab to load
   await newTab.waitForLoadState();
   // Wait for document to be loaded
   const spinningElement = newTab.locator('.animate-spin');
   await spinningElement.waitFor({ state: 'hidden' });
   await newTab.waitForTimeout(10000);
+  logger.info('File has been opened in new tab');
+  logger.info('Test case: Open with new tab option - Completed');
 });
 
 test("Verifiy that user is able to open file from file list by using preview option", async () => {
+  logger.info('Test case: File Open with Preview - Started');
   // Perform user login
   await loginPage.login(page1, page2, userData.URL, userData.email, userData.mailServer);
+  logger.info('User has sucessfully login to application');
   // Goto home page
   await dashboardPage.homeBtn.click();
   await page1.goto(userData.homePageUrl)
   await page1.waitForTimeout(10000);
+  logger.info('User has sucessfully landed to dashboard page');
   // Click on action option
   const documentOptions = dashboardPage.actionIcon;
   await documentOptions.waitFor({ state: 'visible' });
   await documentOptions.click();
-  // Click on open new tab option
+  logger.info('User has clicked on action button');
+  // Click on preview option
   const [newTab] = await Promise.all([
     context.waitForEvent('page'),
     dashboardPage.previewBtn.click()
   ]);
+  logger.info('User has clicked on preview option');
   // Wait for the new tab to load
   await newTab.waitForLoadState();
   // Assertion the valid document link 
   const newTabUrl = newTab.url();
   console.log(newTabUrl)
   expect(newTabUrl).toBe(userData.documentTabUrl);
+  logger.info('Preview URL has been verified');
   // Wait for the new tab to load
   await newTab.waitForLoadState();
   // Wait for document to be loaded
   const spinningElement = newTab.locator('.animate-spin');
   await spinningElement.waitFor({ state: 'hidden' });
   await newTab.waitForTimeout(5000);
+  logger.info('File has been opened in new tab');
+  logger.info('Test case: Open with preview option - Completed');
 });
 
 test("Verify that user is able to perform file search", async () => {
+  logger.info('Test case: File search - Started');
   // Perform user login
   await loginPage.login(page1, page2, userData.URL, userData.email, userData.mailServer)
+  logger.info('User has sucessfully login to application');
   // Goto home page
   await dashboardPage.homeBtn.click();
   await page1.goto(userData.homePageUrl)
   await page1.waitForTimeout(5000);
+  logger.info('User has sucessfully landed to dashboard page');
   // Search file
   await dashboardPage.searchBox.fill(userData.searchText)
   // QA document file should be visible after search
@@ -129,5 +154,6 @@ test("Verify that user is able to perform file search", async () => {
   const docFile = dashboardPage.docFile
   // Assert that the qaDocFile is visible
   await expect(docFile).toBeHidden();
-
+  logger.info('File searching operation is fine');
+  logger.info('Test case: File search - Completed');
 });
