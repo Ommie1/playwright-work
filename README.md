@@ -49,6 +49,7 @@ reporter: [
   ['allure-playwright'], 
 ],
 globalTeardown: './global-teardown.js',
+```
 
 ## Author
 
