@@ -1,10 +1,10 @@
-import { join } from 'path';
-import { deleteLogFilesInFolder } from './utils/utils';
+const path = require('path');
+const { deleteOldLogFiles } = require('./tests-utils/utils');
 
-export default async () => {
-    // Define the folder path
-    const folderPath = join(__dirname, '/test-logs');
+module.exports = async () => {
+    // Define the folder path where Winston log files are stored
+    const folderPath = path.join(__dirname, 'test-logs'); // Adjust path as needed
 
-    // Delete log files
-    deleteLogFilesInFolder(folderPath);
+    // Delete old log files
+    deleteOldLogFiles(folderPath);
 };

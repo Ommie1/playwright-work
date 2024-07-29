@@ -13,6 +13,7 @@ const { defineConfig, devices } = require("@playwright/test");
  */
 
 module.exports = defineConfig({
+  globalSetup: require.resolve('./global-setup'),
   testDir: "./tests",
   expect: {
     timeout: 10000,
@@ -32,13 +33,6 @@ module.exports = defineConfig({
     browserName: "chromium",
     headless: false,
     screenshot:'on',  // For Screenshot
-    trace:'on', // Log every step
-    globalSetup: require.resolve('./global-setup'),
+    trace:'on' // Log every step    
   },
 });
-
-// // playwright.config.js
-// module.exports = {
-//   globalSetup: require.resolve('./global-setup'),
-//   // other configurations...
-// };

@@ -43,7 +43,7 @@ test.afterEach(async () => {
 
 test("Verifiy that user is able to open file from file list by using Open in New Tab option", async () => {
   // Perform user login
-  logger.info('Test case: Open with new tab option - Started');
+  logger.info('******** Test case: Open with new tab option - Started ********');
   await loginPage.login(page1, page2, userData.URL, userData.email, userData.mailServer)
   logger.info('User has sucessfully login to application');
   // Goto home page
@@ -76,11 +76,11 @@ test("Verifiy that user is able to open file from file list by using Open in New
   await spinningElement.waitFor({ state: 'hidden' });
   await newTab.waitForTimeout(100000);
   logger.info('File has been opened in new tab');
-  logger.info('Test case: Open with new tab option - Completed');
+  logger.info('******** Test case: Open with new tab option - Completed ********');
 });
 
 test("Verifiy that user is able to open file from file list by using preview option", async () => {
-  logger.info('Test case: File Open with Preview - Started');
+  logger.info('******** Test case: File Open with Preview - Started ********');
   // Perform user login
   await loginPage.login(page1, page2, userData.URL, userData.email, userData.mailServer);
   logger.info('User has sucessfully login to application');
@@ -114,11 +114,11 @@ test("Verifiy that user is able to open file from file list by using preview opt
   await spinningElement.waitFor({ state: 'hidden' });
   await newTab.waitForTimeout(100000);
   logger.info('File has been opened in new tab');
-  logger.info('Test case: Open with preview option - Completed');
+  logger.info('******** Test case: Open with preview option - Completed ********');
 });
 
 test("Verify that user is able to perform file search", async () => {
-  logger.info('Test case: File search - Started');
+  logger.info('******** Test case: File search - Started ********');
   // Perform user login
   await loginPage.login(page1, page2, userData.URL, userData.email, userData.mailServer)
   logger.info('User has sucessfully login to application');
@@ -138,5 +138,5 @@ test("Verify that user is able to perform file search", async () => {
   // Assert that the qaDocFile is visible
   await expect(docFile).toBeHidden();
   logger.info('File searching operation is fine');
-  logger.info('Test case: File search - Completed');
+  logger.info('******** Test case: File search - Completed ********');
 });

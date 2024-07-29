@@ -42,7 +42,7 @@ test.afterEach(async () => {
 });
 
 test("Verify that user is able to login", async () => {
-  logger.info('Test case: User Login - Started');
+  logger.info('******** Test case: User Login - Started ********');
   // Perform user login
   await loginPage.login(page1, page2, userData.URL, userData.email, userData.mailServer)
   logger.info('User has sucessfully login to application');
@@ -54,5 +54,5 @@ test("Verify that user is able to login", async () => {
   // Assert that user is landing to dashboard page
   await expect(homePage.userEmailText).toHaveText(userData.email);
   logger.info('User email is verified on dashboard');
-  logger.info('Test case: User Login - Completed');
+  logger.info('******** Test case: User Login - Completed ********');
 });
