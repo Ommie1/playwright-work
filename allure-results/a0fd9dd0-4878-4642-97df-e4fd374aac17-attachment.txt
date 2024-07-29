@@ -1,5 +1,0 @@
-info: ******** Test case: User Login - Started ******** {"timestamp":"2024-07-29T17:24:09.647Z"}
-info: User has sucessfully login to application {"timestamp":"2024-07-29T17:25:07.440Z"}
-info: User has sucessfully landed to dashboard page {"timestamp":"2024-07-29T17:25:26.418Z"}
-info: User email is verified on dashboard {"timestamp":"2024-07-29T17:25:26.455Z"}
-info: ******** Test case: User Login - Completed ******** {"timestamp":"2024-07-29T17:25:26.455Z"}
