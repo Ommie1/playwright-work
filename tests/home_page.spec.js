@@ -43,7 +43,7 @@ test.afterEach(async () => {
 
 // Execute tests in serial or parallel mode
 test.describe.configure({mode:"serial"})
-test("Verifiy that user is able to open file from file list by using Open in New Tab option", async () => {
+test("@homepage Verifiy that user is able to open file from file list by using Open in New Tab option", async () => {
   // Perform user login
   logger.info('******** Test case: Open with new tab option - Started ********');
   await loginPage.login(page1, page2, userData.URL, userData.email, userData.mailServer)
@@ -81,7 +81,7 @@ test("Verifiy that user is able to open file from file list by using Open in New
   logger.info('******** Test case: Open with new tab option - Completed ********');
 });
 
-test("Verifiy that user is able to open file from file list by using preview option", async () => {
+test("@homepage Verifiy that user is able to open file from file list by using preview option", async () => {
   logger.info('******** Test case: File Open with Preview - Started ********');
   // Perform user login
   await loginPage.login(page1, page2, userData.URL, userData.email, userData.mailServer);
@@ -119,7 +119,7 @@ test("Verifiy that user is able to open file from file list by using preview opt
   logger.info('******** Test case: Open with preview option - Completed ********');
 });
 
-test("Verify that user is able to perform file search", async () => {
+test("@homepage Verify that user is able to perform file search", async () => {
   logger.info('******** Test case: File search - Started ********');
   // Perform user login
   await loginPage.login(page1, page2, userData.URL, userData.email, userData.mailServer)

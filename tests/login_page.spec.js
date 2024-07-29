@@ -41,7 +41,7 @@ test.afterEach(async () => {
   await browser.close();
 });
 
-test("Verify that user is able to login", async () => {
+test("@loginpage Verify that user is able to login", async () => {
   logger.info('******** Test case: User Login - Started ********');
   // Perform user login
   await loginPage.login(page1, page2, userData.URL, userData.email, userData.mailServer)

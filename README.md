@@ -24,10 +24,20 @@ npx playwright install
 
 ## Running the tests
 
-Run UI tests on CLI, use following command,
+Run UI tests, use following command,
 
 ```
 npx playwright test
+```
+
+Run UI tests on the basis of tags, use following command,
+
+```
+npx playwright test --grep @loginpage
+```
+
+```
+npx playwright test --grep @homepage
 ```
 
 ## Author
