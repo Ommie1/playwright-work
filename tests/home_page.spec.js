@@ -41,6 +41,8 @@ test.afterEach(async () => {
   await browser.close();
 });
 
+// Execute tests in serial or parallel mode
+test.describe.configure({mode:"serial"})
 test("Verifiy that user is able to open file from file list by using Open in New Tab option", async () => {
   // Perform user login
   logger.info('******** Test case: Open with new tab option - Started ********');
