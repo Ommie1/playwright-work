@@ -74,7 +74,7 @@ test("Verifiy that user is able to open file from file list by using Open in New
   // Wait for document to be loaded
   const spinningElement = newTab.locator('.animate-spin');
   await spinningElement.waitFor({ state: 'hidden' });
-  await newTab.waitForTimeout(10000);
+  await newTab.waitForTimeout(100000);
   logger.info('File has been opened in new tab');
   logger.info('Test case: Open with new tab option - Completed');
 });
@@ -112,7 +112,7 @@ test("Verifiy that user is able to open file from file list by using preview opt
   // Wait for document to be loaded
   const spinningElement = newTab.locator('.animate-spin');
   await spinningElement.waitFor({ state: 'hidden' });
-  await newTab.waitForTimeout(5000);
+  await newTab.waitForTimeout(100000);
   logger.info('File has been opened in new tab');
   logger.info('Test case: Open with preview option - Completed');
 });

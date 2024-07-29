@@ -32,6 +32,13 @@ module.exports = defineConfig({
     browserName: "chromium",
     headless: false,
     screenshot:'on',  // For Screenshot
-    trace:'on' // Log every step
+    trace:'on', // Log every step
+    globalSetup: require.resolve('./global-setup'),
   },
 });
+
+// // playwright.config.js
+// module.exports = {
+//   globalSetup: require.resolve('./global-setup'),
+//   // other configurations...
+// };
