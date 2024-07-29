@@ -1,9 +1,0 @@
-info: ******** Test case: File Open with Preview - Started ******** {"timestamp":"2024-07-29T17:35:37.663Z"}
-info: User has sucessfully login to application {"timestamp":"2024-07-29T17:36:18.796Z"}
-info: User has sucessfully landed to dashboard page {"timestamp":"2024-07-29T17:36:33.740Z"}
-info: User has clicked on action button {"timestamp":"2024-07-29T17:36:33.855Z"}
-info: User has clicked on preview option {"timestamp":"2024-07-29T17:36:34.811Z"}
-https://fenixshare.anchormydata.com/fenixpyre/v/QA%20-%20Automation%20Task.docx
-info: Preview URL has been verified {"timestamp":"2024-07-29T17:36:35.256Z"}
-info: File has been opened in new tab {"timestamp":"2024-07-29T17:38:24.817Z"}
-info: ******** Test case: Open with preview option - Completed ******** {"timestamp":"2024-07-29T17:38:24.817Z"}
