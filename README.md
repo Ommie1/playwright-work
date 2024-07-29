@@ -45,8 +45,10 @@ npx playwright test --grep @homepage
 By default playwright HTML reporting is enable. If you want to use Allure reporting comment the playwright reporter and uncomment Allure reporter lines mentioned below in playwright.config.js file and execute the test as per above mentioned commands.
 
 reporter: [
+    
     ['allure-playwright'],
 ],
+
 globalTeardown: './global-teardown.js',
 
 ## Author
