@@ -40,17 +40,26 @@ npx playwright test --grep @loginpage
 npx playwright test --grep @homepage
 ```
 
+## Enable Allure HTML Reporting
+
+By default playwright HTML reporting is enable. If you want to use Allure reporting comment the playwright reporter and uncomment Allure reporter lines mentioned below in playwright.config.js file and execute the test as per above mentioned commands.
+
+reporter: [
+    ['allure-playwright'],
+],
+globalTeardown: './global-teardown.js',
+
 ## Author
 
 - **Syed Umair Hassan**
 
 ## Framework Capablities
 
-- Framework: This framework has been built on Playwright https://playwright.dev/
-- Use Page Object Model (POM): All the page object locator organised in page-object folder
-- Reporting: HTML Playwright report exist in playwright-report folder
-- Logging: Test execution log present in test-logs folder
-- Screenshots: Playwright maintains test execution screenshots in test-results folder
+- Framework: This framework has been built on Playwright https://playwright.dev/.
+- Use Page Object Model (POM): All the page object locator organised in page-object folder.
+- Reporting: HTML Playwright report exist in playwright-report folder. Added additional Allure reporting.
+- Logging: Test execution log present in test-logs folder.
+- Screenshots: Playwright maintains test execution screenshots in test-results folder.
 
 ## Test Cases 
 1. Verify that user is able to login - Automated

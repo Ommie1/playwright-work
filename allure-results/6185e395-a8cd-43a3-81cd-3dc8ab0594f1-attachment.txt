@@ -1,0 +1,9 @@
+info: ******** Test case: Open with new tab option - Started ******** {"timestamp":"2024-07-29T17:32:26.815Z"}
+info: User has sucessfully login to application {"timestamp":"2024-07-29T17:33:26.457Z"}
+info: User has sucessfully landed to dashboard page {"timestamp":"2024-07-29T17:33:42.565Z"}
+info: User has clicked on action button {"timestamp":"2024-07-29T17:33:43.508Z"}
+info: User has clicked on open in new tab option {"timestamp":"2024-07-29T17:33:44.840Z"}
+https://fenixshare.anchormydata.com/fenixpyre/v/QA%20-%20Automation%20Task.docx
+info: New tab URL has been verified {"timestamp":"2024-07-29T17:33:45.743Z"}
+info: File has been opened in new tab {"timestamp":"2024-07-29T17:35:35.289Z"}
+info: ******** Test case: Open with new tab option - Completed ******** {"timestamp":"2024-07-29T17:35:35.289Z"}

@@ -15,3 +15,6 @@ screenshots/
 
 # Ignore Playwright report directory
 playwright-report/
+
+# Ignore Allure report directory
+allure-report/

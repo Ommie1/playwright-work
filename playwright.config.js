@@ -25,9 +25,14 @@ module.exports = defineConfig({
   /* Retry on CI only */
   retries: 1,
   /* Opt out of parallel tests on CI. */
-  workers: 3,
+  workers: 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+  // By default playwright report
   reporter: "html",
+  // reporter: [
+  //   ['allure-playwright'],
+  // ],
+  // globalTeardown: './global-teardown.js', // specify the global teardown script
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     browserName: "chromium",

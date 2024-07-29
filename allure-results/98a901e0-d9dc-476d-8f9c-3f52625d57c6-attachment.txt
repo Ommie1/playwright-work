@@ -1,0 +1,2 @@
+info: ******** Test case: Open with new tab option - Started ******** {"timestamp":"2024-07-29T17:24:09.646Z"}
+info: User has sucessfully login to application {"timestamp":"2024-07-29T17:24:50.302Z"}
