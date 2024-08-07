@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "xvfb-run node login_page.js"
   },
   "keywords": [],
   "author": "",
