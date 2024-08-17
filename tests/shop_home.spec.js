@@ -4,6 +4,7 @@ const shopData = JSON.parse(
   JSON.stringify(require("../test-data/shopData.json"))
 );
 const { faker } = require("@faker-js/faker");
+require('dotenv').config();
 const { ShopHomePage } = require("../page-objects/ShopHomePage");
 const { RegistrationPage } = require("../page-objects/RegistrationPage");
 const { AdminPage } = require("../page-objects/AdminPage");
@@ -38,7 +39,8 @@ test.beforeEach(async () => {
   // Admin page class instance
   adminPage = new AdminPage(page);
   // Open shop application
-  await page.goto(shopData.URL);
+  const baseUrl = process.env.BASE_URL;
+  await page.goto(baseUrl);
 });
 
 // Close the page after each test
