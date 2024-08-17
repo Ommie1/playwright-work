@@ -4,7 +4,7 @@ const shopData = JSON.parse(
   JSON.stringify(require("../test-data/shopData.json"))
 );
 const { faker } = require("@faker-js/faker");
-require('dotenv').config();
+require("dotenv").config();
 const { ShopHomePage } = require("../page-objects/ShopHomePage");
 const { RegistrationPage } = require("../page-objects/RegistrationPage");
 const { AdminPage } = require("../page-objects/AdminPage");
@@ -50,14 +50,10 @@ test.afterEach(async () => {
 });
 
 test("@user-registration verify that user is able to get register on eshop", async () => {
-  await shopHomePage.myAccountLink.click();
-  await shopHomePage.registerLink.click();
-  await registrationPage.firstName.fill(firstName);
-  await registrationPage.lastName.fill(lastName);
-  await registrationPage.email.fill(email);
-  await registrationPage.password.fill(password);
-  await registrationPage.agreeBtn.click();
-  await registrationPage.continueBtn.click();
-  await expect(adminPage.continuebtn).toBeVisible();
-  await expect(adminPage.adminHeadingTxt).toContainText(shopData.adminPageHeadingTxt);
+  // Goto user registraton page
+  await shopHomePage.gotoRegistrationPage();
+  // Add user details
+  await registrationPage.userRegistration(firstName, lastName, email, password);
+  // Confirm user registration
+  await adminPage.verifyUserRegistration(shopData.adminPageHeadingTxt)
 });
