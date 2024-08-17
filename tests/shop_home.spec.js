@@ -1,13 +1,19 @@
 const { test, expect } = require("@playwright/test");
-const { chromium } = require('playwright');
+const { chromium } = require("playwright");
 const shopData = JSON.parse(
   JSON.stringify(require("../test-data/shopData.json"))
 );
-const { faker } = require('@faker-js/faker');
+const { faker } = require("@faker-js/faker");
+const { ShopHomePage } = require("../page-objects/ShopHomePage");
+const { RegistrationPage } = require("../page-objects/RegistrationPage");
+const { AdminPage } = require("../page-objects/AdminPage");
 
 let browser;
 let context;
 let page;
+let shopHomePage;
+let registrationPage;
+let adminPage;
 
 // Generate a first name
 const firstName = faker.person.firstName();
@@ -25,6 +31,12 @@ test.beforeEach(async () => {
   context = await browser.newContext();
   // Open the tab (page)
   page = await context.newPage();
+  // Shop home page class instance
+  shopHomePage = new ShopHomePage(page);
+  // Registration page class instance
+  registrationPage = new RegistrationPage(page);
+  // Admin page class instance
+  adminPage = new AdminPage(page);
   // Open shop application
   await page.goto(shopData.URL);
 });
@@ -36,16 +48,14 @@ test.afterEach(async () => {
 });
 
 test("@user-registration verify that user is able to get register on eshop", async () => {
-    await page.getByRole('link', { name: ' My Account ' }).click();
-    await page.getByRole('link', { name: 'Register' }).click();
-    await page.getByPlaceholder('First Name').fill(firstName);
-    await page.getByPlaceholder('Last Name').fill(lastName);
-    await page.getByPlaceholder('E-Mail').fill(email);
-    await page.getByPlaceholder('Password').fill(password);
-    await page.getByRole('checkbox').check();
-    await page.getByRole('button', { name: 'Continue' }).click();
-    await expect(page.getByRole('link', { name: 'Continue' })).toBeVisible();
-    // await expect(page.locator('h1')).toContainText('Your Account Has Been Created!');
-    // await page.getByRole('link', { name: 'Continue' }).click();
-    // await page.getByRole('link', { name: 'Your Store' }).click();
+  await shopHomePage.myAccountLink.click();
+  await shopHomePage.registerLink.click();
+  await registrationPage.firstName.fill(firstName);
+  await registrationPage.lastName.fill(lastName);
+  await registrationPage.email.fill(email);
+  await registrationPage.password.fill(password);
+  await registrationPage.agreeBtn.click();
+  await registrationPage.continueBtn.click();
+  await expect(adminPage.continuebtn).toBeVisible();
+  await expect(adminPage.adminHeadingTxt).toContainText(shopData.adminPageHeadingTxt);
 });
