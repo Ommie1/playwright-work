@@ -1,20 +1,16 @@
-const { test, expect } = require("@playwright/test");
+const { test } = require("@playwright/test");
 const { chromium } = require("playwright");
 const shopData = JSON.parse(
   JSON.stringify(require("../test-data/shopData.json"))
 );
 const { faker } = require("@faker-js/faker");
 require("dotenv").config();
-const { ShopHomePage } = require("../page-objects/ShopHomePage");
-const { RegistrationPage } = require("../page-objects/RegistrationPage");
-const { AdminPage } = require("../page-objects/AdminPage");
+const { PageObjectManager } = require("../page-objects/PageObjectManager");
 
 let browser;
 let context;
 let page;
-let shopHomePage;
-let registrationPage;
-let adminPage;
+let pageObjectManager;
 
 // Generate a first name
 const firstName = faker.person.firstName();
@@ -25,6 +21,7 @@ const email = faker.internet.email();
 // Generate a random password
 const password = faker.internet.password();
 
+
 test.beforeEach(async () => {
   // Launch the browser
   browser = await chromium.launch({ headless: false });
@@ -32,15 +29,10 @@ test.beforeEach(async () => {
   context = await browser.newContext();
   // Open the tab (page)
   page = await context.newPage();
-  // Shop home page class instance
-  shopHomePage = new ShopHomePage(page);
-  // Registration page class instance
-  registrationPage = new RegistrationPage(page);
-  // Admin page class instance
-  adminPage = new AdminPage(page);
+  // Create POM manager class instance
+  pageObjectManager = new PageObjectManager(page);
   // Open shop application
-  const baseUrl = process.env.BASE_URL;
-  await page.goto(baseUrl);
+  pageObjectManager.getShopHomePage().gotoSite();
 });
 
 // Close the page after each test
@@ -50,10 +42,10 @@ test.afterEach(async () => {
 });
 
 test("@user-registration verify that user is able to get register on eshop", async () => {
-  // Goto user registraton page
-  await shopHomePage.gotoRegistrationPage();
-  // Add user details
-  await registrationPage.userRegistration(firstName, lastName, email, password);
-  // Confirm user registration
-  await adminPage.verifyUserRegistration(shopData.adminPageHeadingTxt)
-});
+  // Goto registration page
+  await pageObjectManager.getShopHomePage().gotoRegistrationPage();
+  // User perform registration
+  await pageObjectManager.getRegistrationPage().userRegistration(firstName, lastName, email, password);
+  // user complete registration process
+  await pageObjectManager.getAdminPage().verifyUserRegistration(shopData.adminPageHeadingTxt);
+})
