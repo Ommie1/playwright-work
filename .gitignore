@@ -19,3 +19,6 @@ playwright-report/
 # Ignore Allure report directories
 allure-report/
 allure-results/
+
+# Ignore .env file
+.env
