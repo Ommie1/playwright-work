@@ -21,31 +21,51 @@ const email = faker.internet.email();
 // Generate a random password
 const password = faker.internet.password();
 
-
 test.beforeEach(async () => {
-  // Launch the browser
-  browser = await chromium.launch({ headless: false });
-  // Create a new browser context
-  context = await browser.newContext();
-  // Open the tab (page)
-  page = await context.newPage();
-  // Create POM manager class instance
-  pageObjectManager = new PageObjectManager(page);
-  // Open shop application
-  pageObjectManager.getShopHomePage().gotoSite();
+  try {
+    // Launch the browser
+    browser = await chromium.launch({ headless: false });
+    // Create a new browser context
+    context = await browser.newContext();
+    // Open the tab (page)
+    page = await context.newPage();
+    // Create POM manager class instance
+    pageObjectManager = new PageObjectManager(page);
+    // Open shop application
+    await pageObjectManager.getShopHomePage().gotoSite();
+  } catch (error) {
+    console.error("Failed to open site:", error);
+    throw error;
+  }
 });
 
 // Close the page after each test
 test.afterEach(async () => {
-  await context.close();
-  await browser.close();
+  try {
+    if (context) {
+      await context.close();
+    }
+  } finally {
+    if (browser) {
+      await browser.close();
+    }
+  }
 });
 
 test("@user-registration verify that user is able to get register on eshop", async () => {
-  // Goto registration page
-  await pageObjectManager.getShopHomePage().gotoRegistrationPage();
-  // User perform registration
-  await pageObjectManager.getRegistrationPage().userRegistration(firstName, lastName, email, password);
-  // user complete registration process
-  await pageObjectManager.getAdminPage().verifyUserRegistration(shopData.adminPageHeadingTxt);
-})
+  try {
+    // Goto registration page
+    await pageObjectManager.getShopHomePage().gotoRegistrationPage();
+    // User perform registration
+    await pageObjectManager
+      .getRegistrationPage()
+      .userRegistration(firstName, lastName, email, password);
+    // user complete registration process
+    await pageObjectManager
+      .getAdminPage()
+      .verifyUserRegistration(shopData.adminPageHeadingTxt);
+  } catch (error) {
+    console.error("Failed to open site:", error);
+    throw error;
+  }
+});
