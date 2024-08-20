@@ -1,7 +1,8 @@
 class ShopHomePage {
   constructor(page) {
     this.page = page;
-    this.myAccountLink = page.getByRole("link", { name: " My Account " });
+    // this.myAccountLink = page.getByRole("link", { name: " My Account " });
+    this.myAccountLink = page.locator('[class="dropdown-toggle"]').nth(1);
     this.registerLink = page.getByRole("link", { name: "Register" });
   }
 
