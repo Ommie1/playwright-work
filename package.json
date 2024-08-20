@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+   "test:ui": "npx playwright test --project='ui-chromium'",
+   "test:api": "npx playwright test --project='ui-chromium'"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

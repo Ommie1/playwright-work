@@ -1,25 +1,25 @@
-import { test, Browser, BrowserContext, Page } from "@playwright/test";
-import { chromium } from "playwright";
-import shopData from "../test-data/shopData.json";
-import { faker } from "@faker-js/faker";
-import { PageObjectManager } from "../page-objects/PageObjectManager";
-import dotenv from "dotenv";
+const { test } = require("@playwright/test");
+const { chromium } = require("playwright");
+const shopData = JSON.parse(
+  JSON.stringify(require("../../test-data/shopData.json"))
+);
+const { faker } = require("@faker-js/faker");
+require("dotenv").config();
+const { PageObjectManager } = require("../../page-objects/PageObjectManager");
 
-dotenv.config();
-
-let browser: Browser | undefined;
-let context: BrowserContext | undefined;
-let page: Page | undefined;
-let pageObjectManager: PageObjectManager | undefined;
+let browser;
+let context;
+let page;
+let pageObjectManager;
 
 // Generate a first name
-const firstName: string = faker.person.firstName();
+const firstName = faker.person.firstName();
 // Generate a last name
-const lastName: string = faker.person.lastName();
+const lastName = faker.person.lastName();
 // Generate a fake email address
-const email: string = faker.internet.email();
+const email = faker.internet.email();
 // Generate a random password
-const password: string = faker.internet.password();
+const password = faker.internet.password();
 
 test.beforeEach(async () => {
   try {
@@ -53,23 +53,19 @@ test.afterEach(async () => {
 });
 
 test("@user-registration verify that user is able to get register on eshop", async () => {
-  if (!pageObjectManager) {
-    throw new Error("PageObjectManager not initialized");
-  }
-  
   try {
-    // Go to the registration page
+    // Goto registration page
     await pageObjectManager.getShopHomePage().gotoRegistrationPage();
-    // User performs registration
+    // User perform registration
     await pageObjectManager
       .getRegistrationPage()
       .userRegistration(firstName, lastName, email, password);
-    // Verify user registration process
+    // user complete registration process
     await pageObjectManager
       .getAdminPage()
       .verifyUserRegistration(shopData.adminPageHeadingTxt);
   } catch (error) {
-    console.error("Failed to complete registration process:", error);
+    console.error("Failed to open site:", error);
     throw error;
   }
 });

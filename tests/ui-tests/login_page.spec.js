@@ -1,11 +1,11 @@
 const { test, expect } = require("@playwright/test");
-const { LoginPage } = require("../page-objects/LoginPage");
-const { HomePage } = require("../page-objects/HomePage");
+const { LoginPage } = require("../../page-objects/LoginPage");
+const { HomePage } = require("../../page-objects/HomePage");
 const { chromium } = require('playwright');
-const logger = require('../logger');
-const { MailinatorPage } = require("../page-objects/MailinatorPage");
+const logger = require('../../logger');
+const { MailinatorPage } = require("../../page-objects/MailinatorPage");
 const userData = JSON.parse(
-  JSON.stringify(require("../test-data/userTestData.json"))
+  JSON.stringify(require("../../test-data/userTestData.json"))
 );
 
 let loginPage;
